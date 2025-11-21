@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Student {
+    int roll;
+    char name[]; // flexible array member
+};
+
+int main() {
+    char tempName[50];
+    scanf("%d",&tempName[0]); // roll
+    getchar();
+    fgets(tempName,sizeof(tempName),stdin);
+    tempName[strcspn(tempName,"\n")]=0;
+
+    struct Student* s = malloc(sizeof(struct Student) + strlen(tempName)+1);
+    s->roll = 101;
+    strcpy(s->name,tempName);
+
+    printf("Roll: %d Name: %s\n", s->roll, s->name);
+    free(s);
+
+    return 0;
+}
+
+/*
+Input:
+John
+
+Output:
+Roll: 101 Name: John
+*/
